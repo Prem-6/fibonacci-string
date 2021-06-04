@@ -1,0 +1,25 @@
+def dynamic_string(string):
+    count_list = [string.count(x) for x in set(string)]
+    count_list.sort()
+    check = 1
+    if len(count_list) < 3:
+        return 'Dynamic'
+    if count_list[2] != count_list[1] + count_list[0]:
+        count_list[0], count_list[1] = count_list[1], count_list[0]
+    for i in range(len(count_list)-1, 1, -1):
+        if count_list[i] != count_list[i-1] + count_list[i-2]:
+            check = 0
+            break
+    if check == 1:
+        return 'Dynamic'
+    else:
+        return 'Not'
+
+output = ""
+user_input = int(input())
+
+for i in range(user_input):
+    to_check = input()
+    output += dynamic_string(to_check) + ' \n'
+
+print(output)
